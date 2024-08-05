@@ -32,7 +32,7 @@ class Home extends BaseController
                 if (!empty($fecthUsenameData)){
                     if(password_verify($password,$fecthUsenameData->password)){
 
-                        session()->setFlashdata("succes","Login successfylly");
+                        session()->setFlashdata("success","Login successfylly");
 
                         $data = array(
                             'username' => $fecthUsenameData->username,

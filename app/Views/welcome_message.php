@@ -8,23 +8,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <?php $validation = \Config\Services::validation()?>
+    <?php
+
+use Kint\Zval\Value;
+
+ $validation = \Config\Services::validation()?>
     <div class="container mt-5 d-flex justify-content-center align-items-center">
         <div class="card">
             <div class="card-header bg-primary">
                 <h5 class="text-white">Secure Login system using CodeIgniter4 with mySql database</h5>
-                <h6><?php echo session()->get('error'); ?></h6>
-                <h6><?php echo session()->get('success'); ?></h6>
             </div>
 
             <div class="card-body shadow-sm">
                 <div class="container h-custom">
+
+                    <?php if(session()->has('error')) {?>
+                        <div class="alert alert-danger p-1 text-center" role="alert">
+                        <?= session()->get('error'); ?>
+                        </div>
+                    <?php }?>
+
+                    <?php if(session()->has('success')) {?>
+                        <div class="alert alert-success p-1 text-center" role="alert">
+                        <?= session()->get('success'); ?>
+                        </div>
+                    <?php }?>
+
                     <div class="row d-flex justify-content-center align-items-center h-100 my-4">
                         <div class="col-md-9 col-lg-6 col-xl-5">
                             <img src="<?php echo base_url('connexion.png'); ?>" alt="" class="img-fluid">
                         </div>
                         <div class="col-md-8 col-lg-6 col-xl-6 offset-xl-1">
                             <form method="POST" action="<?php echo site_url('/'); ?>">
+                                <input type="hidden" name=" <?= csrf_token()?>" value=" <?= csrf_hash()?>">
                                 <div class="d-flex flex-row justify-content-center align-items-center">
                                     <p class="lead fw-normal">Sign in with</p>
                                     <button type="button" class="btn btn-primary btn-floating mx-1">
